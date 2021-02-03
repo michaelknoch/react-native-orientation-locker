@@ -129,10 +129,7 @@ static UIInterfaceOrientationMask _orientationMask = UIInterfaceOrientationMaskA
     
     [currentDevice setValue:@(UIInterfaceOrientationUnknown) forKey:orientation];
     [currentDevice setValue:@(newOrientation) forKey:orientation];
-    
-    // restore device orientation
-    [currentDevice setValue:@(deviceOrientation) forKey:orientation];
-    
+        
     [UIViewController attemptRotationToDeviceOrientation];
     
     [self sendEventWithName:@"lockDidChange" body:@{orientation: [self getOrientationStr:newOrientation]}];
@@ -218,10 +215,7 @@ RCT_EXPORT_METHOD(lockToLandscape)
             [Orientation setOrientation:UIInterfaceOrientationMaskLandscape];
             [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger: UIInterfaceOrientationLandscapeRight] forKey:@"orientation"];
         }
-        
-        // restore device orientation
-        [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger: deviceOrientation] forKey:@"orientation"];
-        
+         
         [UIViewController attemptRotationToDeviceOrientation];
         
         // send a lock event
